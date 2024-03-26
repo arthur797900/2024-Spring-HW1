@@ -75,10 +75,13 @@ contract NFinTech is IERC721 {
     }
 
     function setApprovalForAll(address operator, bool approved) external {
+        require(operator != address(0), "ERC721: setting approve to none address");
         require(msg.sender != operator, "ERC721: approve to caller");
+
         _operatorApproval[msg.sender][operator] = approved;
         emit ApprovalForAll(msg.sender, operator, approved);
     }
+
 
 
     function isApprovedForAll(address owner, address operator) public view returns (bool) {
